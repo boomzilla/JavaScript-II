@@ -1,6 +1,18 @@
 // ==== Challenge 1: Write your own closure ====
 // Write a simple closure of your own creation.  Keep it simple!
+function Xzibit() {
+  let noun = "function";
+  let verb = "compute";
 
+  function YoDawg(){
+    console.log(`Yo dawg, we heard you like ${noun}s, so we put a ${noun} in your ${noun}, so you can ${verb} while you ${verb}`);
+  }
+
+  return YoDawg;
+}
+
+let myFunc = Xzibit();
+myFunc();
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 
