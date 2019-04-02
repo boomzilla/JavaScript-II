@@ -55,29 +55,84 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
+function getFullName(theRunner){
+    //console.log(theRunner);
+    //console.log(theRunner.first_name + " " + theRunner.last_name);
+    //return theRunner.first_name + " " + theRunner.last_name;
+    fullName.push(theRunner.first_name + " "+ theRunner.last_name);
+}
+
 let fullName = [];
+
+runners.forEach(getFullName);
+
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
 let allCaps = [];
+allCaps = runners.map(function(theRunner){return theRunner.first_name.toUpperCase();});
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 let largeShirts = [];
+largeShirts = runners.filter(function(theRunner){if (theRunner.shirt_size === "L"){return theRunner;}});
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
+function getDonataionAmount(theRunner){
+    ticketPriceTotal.push(theRunner.donation);
+}
+
+function sumDonation(total, theDonation){
+    return total + theDonation;
+}
+
 let ticketPriceTotal = [];
-console.log(ticketPriceTotal);
+runners.forEach(getDonataionAmount);
+//ticketPriceTotal.reduce(sumDonation);
+console.log(ticketPriceTotal.reduce(sumDonation));
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+//the event director wants a list of how much each company donated, so that they know with whom to gladhandle the most
+//
+//part A: create a new array, with each element containing the company name, and the corresponding donation, e.g.:
+//the first elem of this new array should be: "{company_name":"Divanoodle","donation":75}"
+
+function getCompaniesByDonation(theRunner){
+    let theCompany = theRunner.company_name;
+    let theDonationAmount = theRunner.donation;
+    companiesByDonation.push({"company_name":theCompany,"donation":theDonationAmount});
+}
+
+let companiesByDonation = [];
+runners.forEach(getCompaniesByDonation);
+
+console.log(companiesByDonation);
+
+//part B: now sort this, so the highest donating companies are at top
 
 // Problem 2
+//the staff thought it would be clever to create a 3-tiered podium-themed recognition to the highest donators
+//
+//Gold Medalists: 250 of more donated
+//Silver Medalists: 200 to 249 donated
+//Bronze Medalists: 150 to 199 donated
+
+let goldCompanies = [];
+let silverCompanies = [];
+let bronzeCompanies = [];
+
+goldCompanies = companiesByDonation.filter(function(theCompany){if (theCompany.donation >= 250){return theCompany;}});
+silverCompanies = companiesByDonation.filter(function(theCompany){if (theCompany.donation >= 200 && theCompany.donation < 250){return theCompany;}});
+bronzeCompanies = companiesByDonation.filter(function(theCompany){if (theCompany.donation >= 150 && theCompany.donation < 200){return theCompany;}});
+
+//console.log(goldCompaies);
+console.log(`1st Place:\n${JSON.stringify(goldCompanies)} \n2nd Place:\n${JSON.stringify(silverCompanies)} \n3rd Place:\n${JSON.stringify(bronzeCompanies)}`);
 
 // Problem 3
